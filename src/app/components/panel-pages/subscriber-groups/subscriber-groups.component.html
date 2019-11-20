@@ -1,0 +1,33 @@
+<div *ngIf="auth.isAuthenticated()">
+  <!-- create subscriber group form -->
+  <app-create-subscriber-group></app-create-subscriber-group>
+</div>
+
+<div *ngIf="auth.isAuthenticated()">
+  <!-- unassigned subscribers table -->
+  <app-unassignedsubscribers-table></app-unassignedsubscribers-table>
+  <div class="container">
+    <div class="jumbotron-fluid">
+      <div class="row">
+        <div class="card card-fluid">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">Manage Subscribers Grouping</div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 list-padding">
+                <span class="list-title">Subscriber Groups</span><br>
+                <app-subscribergroups-table></app-subscribergroups-table>
+              </div>
+              <div class="col-xl-6 list-padding">
+                <span class="list-title">Subscriber Group's Members</span>
+                <app-assignedsubscribers-table></app-assignedsubscribers-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

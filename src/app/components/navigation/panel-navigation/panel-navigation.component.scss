@@ -1,0 +1,42 @@
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+
+.nav-item, .dropdown-item {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+}
+
+.drop-shadow {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.603);
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    left: 100%;
+    /*left:10rem;*/ /* 10rem is the min-width of dropdown-menu */
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+
+.dropdown-menu-right {
+  left: auto;
+}
+
+.login {
+  float: right;
+  font-size: 2em;
+  padding-right: 1em;
+  color: slategrey;
+}
+
+.popover {
+  padding: 0 !important;
+}

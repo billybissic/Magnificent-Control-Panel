@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <!--<span aria-hidden="true">&times;</span>-->
+      <fa-icon [icon]="faTimes" class="'fa-sm"></fa-icon>
+    </button>
+  </div>
+  <div class="card-body">
+      <ng-content></ng-content>
+  </div>
+</div>

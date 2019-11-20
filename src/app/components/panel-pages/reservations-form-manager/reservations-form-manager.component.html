@@ -1,0 +1,192 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Contact Times Available For Customers To Choose</span>
+        <form (ngSubmit)="addNewContactTimes()" novalidate>
+          <div [formGroup]="contactTimesForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" formControlName="contactTimeName" class="form-control" placeholder="Contact Time*" required>
+              </div>
+              <div class="col-7">
+                <input type="text" formControlName="contactTimeDescription" class="form-control" placeholder="Contact Time Description*" required>
+              </div>
+              <div class="col">
+                <button [disabled]="!contactTimesForm.valid" type="submit" class="btn btn-secondary btn-md btn-box-shadow" value="submit">
+                  <div style="text-align:center">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+          <div class="table-responsive table-y-scroll">
+            <table class="table table-hover">
+              <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Contact Time Name</th>
+                <th>Contact Time Description</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let time of contactTimes">
+                <th>{{time.contact_timeframe_id}}</th>
+                <td>{{time.contact_timeframe}}</td>
+                <td>{{time.contact_timeframe_description}}</td>
+                <td>
+                  <button type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faEdit"></fa-icon>
+                    </div>
+                  </button>
+                  <button  (click)="deleteContactTime(time.contact_timeframe_id)" type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </div>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Services Available For Reservation</span>
+        <form (ngSubmit)="addNewReservationService()" novalidate>
+          <div [formGroup]="reservationServicesForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" formControlName="reservationServiceName" class="form-control" placeholder="Service Name*" required>
+              </div>
+              <div class="col-7">
+                <input type="text" formControlName="reservationServiceDescription" class="form-control" placeholder="Service Description*" required>
+              </div>
+              <div class="col">
+                <button [disabled]="!reservationServicesForm.valid" type="sumbit" class="btn btn-secondary btn-md btn-box-shadow" value="submit">
+                  <div style="text-align:center">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+          <div class="table-responsive table-y-scroll">
+            <table class="table table-hover">
+              <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Service Name</th>
+                <th>Service Description</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let type of reservationTypes">
+                <th>{{type.inquiry_type_id}}</th>
+                <td>{{type.inquiry_type_name}}</td>
+                <td>{{type.inquiry_type_description}}</td>
+                <td>
+                  <button type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faEdit"></fa-icon>
+                    </div>
+                  </button>
+                  <button (click)="deleteReservationService(type.inquiry_type_id)" type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </div>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Reservation Status Codes</span>
+        <form (ngSubmit)="addNewStatusCode()" novalidate>
+          <div [formGroup]="reservationStatusesForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" formControlName="reservationStatusName" class="form-control" placeholder="Status Name*" required>
+              </div>
+              <div class="col-7">
+                <input type="text" formControlName="reservationStatusDescription" class="form-control" placeholder="Status Description*" required>
+              </div>
+              <div class="col">
+                <button [disabled]="!reservationStatusesForm.valid" type="submit" class="btn btn-secondary btn-md btn-box-shadow">
+                  <div style="text-align:center">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+          <div class="table-responsive table-y-scroll">
+            <table class="table table-hover">
+              <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Reservation Status</th>
+                <th>Reservation Status Description</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let status of reservationStatuses">
+                <th>{{status.inquiry_status_id}}</th>
+                <td>{{status.inquiry_status_name}}</td>
+                <td>{{status.inquiry_status_description}}</td>
+                <td>
+                  <button type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faEdit"></fa-icon>
+                    </div>
+                  </button>
+                  <button (click)="deleteStatusCode(status.inquiry_status_id)" type="button" class="btn btn-secondary btn-sm">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faTrash"></fa-icon>
+                    </div>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

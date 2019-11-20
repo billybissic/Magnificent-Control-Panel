@@ -1,0 +1,43 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="card">
+    <div class="card-header">
+      Message Center
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Notifications
+        <span class="badge badge-light">9</span>
+        <span class="sr-only">Unread Notifications</span>
+      </li>
+      <li class="list-group-item">Messages
+        <span class="badge badge-light">23</span>
+        <span class="sr-only">Unread Messages</span>
+      </li>
+      <li class="list-group-item">Daily Reports
+        <span class="badge badge-light">10</span>
+        <span class="sr-only">Unread Reports</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="auth.isAuthenticated()">
+  <div class="card">
+    <div class="card-header">
+      Customer Service
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Subscribers
+        <span class="badge badge-light">{{subscriberCount}}</span>
+        <span class="sr-only">New Subscribers Today</span>
+      </li>
+      <li class="list-group-item">Reservations
+        <span class="badge badge-light">23</span>
+        <span class="sr-only">New Reservation Inquiries</span>
+      </li>
+      <li class="list-group-item">Daily Reports
+        <span class="badge badge-light">10</span>
+        <span class="sr-only">Unread Reports</span>
+      </li>
+    </ul>
+  </div>
+</div>

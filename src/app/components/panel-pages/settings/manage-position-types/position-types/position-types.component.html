@@ -1,0 +1,29 @@
+<div *ngIf="auth.isAuthenticated()">
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+      <!-- Id Column -->
+      <ng-container matColumnDef="positionTypeName">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.positionTypeName}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="positionTypeDescription">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.positionTypeDescription}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator
+                   [pageSizeOptions]="[5, 10, 15, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

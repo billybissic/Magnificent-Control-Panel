@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="jumbotron-fluid">
+    <div class="row">
+      <div class="card-fluid card">
+        <div class="card-body">
+          <span class="form-title">Create New Subscriber Group:</span>
+          <form (ngSubmit)="addNewSubscriberGroup()" novalidate>
+            <div [formGroup]="subscriberGroupForm" class="form-group">
+              <div class="form-row">
+                <div class="col-4">
+                  <mat-form-field class="example-full-width">
+                    <input formControlName="subscriberGroupName" matInput placeholder="Group name">
+                  </mat-form-field>
+                </div>
+                <div class="col-7">
+                  <mat-form-field class="example-full-width">
+                    <input formControlName="subscriberGroupDescription" matInput placeholder="Subscriber group description">
+                  </mat-form-field>
+                </div>
+                <div class="col-1">
+                  <button [disabled]="!subscriberGroupForm.valid" type="submit" class="btn btn-secondary btn-md btn-box-shadow" value="submit">
+                    <div style="text-align:center">
+                      <fa-icon [icon]="faPlus"></fa-icon>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="card-fluid">
+  <div class="card-header">
+    <h4 class="card-title">{{title}}
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </h4>
+  </div>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+  <div class="card-footer">
+    <button type="button" class="form-control btn-secondary" (click)="activeModal.close('Close click')">Cancel</button>
+  </div>
+</div>

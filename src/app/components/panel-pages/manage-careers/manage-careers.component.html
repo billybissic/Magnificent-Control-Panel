@@ -1,0 +1,64 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div>
+    <h5>Manage Employment Position</h5>
+    <form class="position-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Name" value="Bartender">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Position Type</mat-label>
+        <mat-select #fontSize value="Waitstaff">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--<mat-form-field class="full-width">
+        <textarea matInput placeholder="Position Description"></textarea>
+      </mat-form-field>-->
+
+      <div class="card-fluid">
+        <ckeditor [(ngModel)]="model.editorData" [editor]="Editor"></ckeditor>
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Application Type</mat-label>
+        <mat-select #fontSize value="General Application">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Position Status</mat-label>
+        <mat-select #fontSize value="Open">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <div class="submit-button-row">
+      <button mat-flat-button color="primary">Create New Position</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <app-positions></app-positions>
+  </div>
+  <br>
+  <br>
+</div>

@@ -1,0 +1,64 @@
+<div *ngIf="auth.isAuthenticated()">
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+      <!-- Inquiry Id Column -->
+      <!--<ng-container matColumnDef="inquiry_id">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.inquiry_id}}</td>
+      </ng-container>-->
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="first_name">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.last_name}},&nbsp;{{row.first_name}}</td>
+      </ng-container>
+
+      <!-- Last Name Column -->
+      <!--<ng-container matColumnDef="last_name">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.last_name}}</td>
+      </ng-container>-->
+
+      <!-- Day Time Phone Number -->
+      <ng-container matColumnDef="day_phone_number">
+        <th class="data-header"mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.day_phone_number}}</td>
+      </ng-container>
+
+      <!-- Email Address -->
+      <ng-container matColumnDef="email_address">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.email_address}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="desired_date">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Reservation Date</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.desired_date}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="desired_time">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Reservation Time</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.desired_time}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th class="data-header" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="fa-icon" mat-cell *matCellDef="let row"><fa-icon [icon]="faEdit" (click)="editRecord(row.inquiry_id)"></fa-icon> &nbsp;<fa-icon [icon]="faTrash" (click)="deleteRecord(row.inquiry_id)"></fa-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          class="element-row"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50, 100, 250]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

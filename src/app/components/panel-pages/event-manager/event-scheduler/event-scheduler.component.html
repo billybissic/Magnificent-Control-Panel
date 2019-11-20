@@ -1,0 +1,235 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="container">
+    <div class="jumbotron bg-light">
+      <h5>Create New Calendar Event</h5>
+      <div [formGroup]="eventScheduler" class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <div class="form-row">
+              &nbsp;<input formControlName="eventTitle" type="text" class="form-control" placeholder="Title (Required)">
+            </div>
+            <div class="form-row">&nbsp;</div>
+            <div class="form-row">
+              <textarea formControlName="eventDescription" class="form-control" placeholder="Description (Required)"></textarea>
+            </div>
+            <div class="form-row">&nbsp;</div>
+            <div class="form-row">
+              <input formControlName="eventImage" class="form-control" placeholder="Select Image to Upload" type="text">
+            </div>
+            <div class="form-row">&nbsp;</div>
+            <div class="form-row">
+              <div class="col">
+                <label id="#bb" class="btn form-control btn-secondary"><fa-icon [icon]="faFolderOpen"></fa-icon>
+                  <input  type="file" file-upload multiple id="File" size="60" [(ngModel)]="eventUpload" (change)="onFileChanged($event)" [ngModelOptions]="{standalone: true}">
+                </label>
+              </div>
+              <div class="col">
+                <button class="form-control btn-secondary" (click)="uploadFlyer()"><fa-icon [icon]="faUpload"></fa-icon></button>
+              </div>
+              <div class="col">
+                <button class="form-control btn-secondary" (click)="removeFlyer()">
+                  <fa-icon [icon]="faTrashAlt"></fa-icon></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="col"></div>
+          <div class="col">
+            <h5 [hidden]="!show">Image Preview</h5>
+            <div style="width: 250px; height: 355px; border: 1px black; border-style: solid;">
+              <img [hidden]="!show" id="preview" src="{{flyerPreview}}" height="355px" width="250px">
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!--<div class="form-row">
+        <div class="col-12">-->
+      <!--<input formControlName="eventTitle" type="text" class="form-control" placeholder="Title (Required)">-->
+      <!--</div>
+    </div>
+    <br>-->
+      <!--<div class="form-row">
+        <div class="col-12">-->
+      <!--<input formControlName="eventDescription" type="text" class="form-control" placeholder="Description (Required)">-->
+      <!--</div>
+    </div>
+    <br>-->
+      <!--<div class="form-row">
+        <div class="col-9">-->
+      <!--<input formControlName="eventImage" class="form-control" placeholder="Select Image to Upload" type="text">-->
+      <!--</div>
+      <div class="col">
+        <label id="#bb" class="btn form-control btn-secondary"><fa-icon [icon]="faFolderOpen"></fa-icon>
+          <input  type="file" file-upload multiple id="File" size="60" [(ngModel)]="eventUpload" (change)="onFileChanged($event)" [ngModelOptions]="{standalone: true}">
+        </label>
+      </div>
+      <div class="col">
+        <button class="form-control btn-secondary" (click)="uploadFlyer()"><fa-icon [icon]="faUpload"></fa-icon></button>
+      </div>
+      <div class="col">
+        <button class="form-control btn-secondary" (click)="removeFlyer()">
+          <fa-icon [icon]="faTrashAlt"></fa-icon></button>
+      </div>
+    </div>-->
+      <br>
+      <div class="form-row">
+        <div class="col-6">
+          <label>Host:</label>
+          <input formControlName="eventHost" placeholder="Event Host (Required)" class="form-control">
+        </div>
+        <br>
+        <div class="col-6">
+          <label>Location:</label>
+          <input formControlName="eventLocation" placeholder="Address (Required)" class="form-control">
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-6">
+          <!--<label>Event Type</label>-->
+          <select formControlName="eventType" class="form-control" (ngModelChange)="setColors()">
+            <option value="" selected disabled hidden>Select Event Type</option>
+            <option *ngFor="let type of eventTypes" [ngValue]="type">{{type.event_type_name}}</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <!--<label>Event Frequency</label>-->
+          <select formControlName="eventFrequency" class="form-control">
+            <option value="" selected disabled hidden>Select Event Frequency</option>
+            <option *ngFor="let frequency of eventFrequencies" [value]="frequency.event_frequency_id">{{frequency.event_frequency_name}}</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col-5">
+          <label>Primary Color:</label>
+          <input disabled class="form-control"
+                 [style.background]="primaryColor"
+                 [cpAlphaChannel]="'always'"
+                 [cpOutputFormat]="'hex'"
+                 [cpSaveClickOutside]="'true'"
+                 [(cpToggle)]="primaryToggle"
+                 [(colorPicker)]="primaryColor"/>
+        </div>
+        <div class="col-1">
+          <label>&nbsp;</label>
+          <button #ignoredButton class="form-control btn-secondary" (click)="primaryToggle=!primaryToggle">
+            <fa-icon [icon]="faPalette"></fa-icon>
+          </button>
+        </div>
+        <div class="col-5">
+          <label>Secondary Color:</label>
+          <input  class="form-control"
+                  [style.background]="secondaryColor"
+                  [cpAlphaChannel]="'always'"
+                  [cpOutputFormat]="'hex'"
+                  [cpSaveClickOutside]="'true'"
+                  [(cpToggle)]="secondaryToggle"
+                  [(colorPicker)]="secondaryColor"/>
+        </div>
+        <div class="col-1">
+          <label>&nbsp;</label>
+          <button #ignoredButton class="form-control btn-secondary" (click)="secondaryToggle=!secondaryToggle">
+            <fa-icon [icon]="faPalette"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <label class="date-label">Start: </label>
+        <div class="col-5">
+          <div class="input-group">
+            <input [(ngModel)]="modelStartDate" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="col-5">
+          <ngb-timepicker [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}" [seconds]="true" [spinners]="true"
+                          [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep" [meridian]="true"></ngb-timepicker>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-row">
+        <label class="date-label">End: &nbsp;</label>
+        <div class="col-5">
+          <div class="input-group">
+            <input [(ngModel)]="modelEndDate" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp2"  ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="col-5">
+          <ngb-timepicker [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}" [seconds]="seconds" [spinners]="spinners"
+                          [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep" [meridian]="meridian"></ngb-timepicker>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-row">
+
+        <!--<div class="form-row">-->
+        <div class="col">
+          <div class="inline-field">
+            <input type="checkbox" id="ade" [(ngModel)]="model.allDay" [ngModelOptions]="{standalone: true}">
+            <label for="ade">All Day Event</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input type="checkbox" id="rbs" [(ngModel)]="model.resizableStart" [ngModelOptions]="{standalone: true}">
+            <label for="rbs">Resizable Start</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input type="checkbox" id="ras" [(ngModel)]="model.resizableEnd" [ngModelOptions]="{standalone: true}">
+            <label for="ras">Resizable Ending</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input type="checkbox" id="draggable" [(ngModel)]="model.draggable" [ngModelOptions]="{standalone: true}">
+            <label for="draggable">Draggable</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+
+        <div class="col-6">
+          <button (click)="submit()" class="form-control btn-secondary">Create</button>
+        </div>
+
+        <div class="col-6">
+          <button (click)="resetEventScheduleForm()" type="button" class="form-control btn-secondary">Reset</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div *ngIf="!auth.isAuthenticated()">
+  You are not logged in! Please <a (click)="auth.login()">Log In</a> to continue.
+</div>

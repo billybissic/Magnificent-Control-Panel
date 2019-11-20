@@ -1,0 +1,52 @@
+// src/sass/styles.scss
+@import './variables';
+@import './mixins';
+
+@import './../../node_modules/bootstrap/scss/functions',
+        './../../node_modules/bootstrap/scss/variables',
+        './../../node_modules/bootstrap/scss/mixins',
+        './../../node_modules/bootstrap/scss/type',
+        './../../node_modules/bootstrap/scss/images',
+        './../../node_modules/bootstrap/scss/jumbotron',
+        './../../node_modules/bootstrap/scss/forms',
+        './../../node_modules/bootstrap/scss/input-group',
+        './../../node_modules/bootstrap/scss/buttons',
+        './../../node_modules/bootstrap/scss/button-group',
+        './../../node_modules/bootstrap/scss/dropdown',
+        './../../node_modules/bootstrap/scss/nav',
+        './../../node_modules/bootstrap/scss/navbar',
+        './../../node_modules/bootstrap/scss/card',
+        './../../node_modules/bootstrap/scss/pagination';
+
+@import './../../node_modules/angular-calendar/scss/modules/month/calendar-month-view.scss',
+        './../../node_modules/angular-calendar/scss/modules/week/calendar-week-view.scss',
+        './../../node_modules/angular-calendar/scss/modules/day/calendar-day-view.scss',
+        './../../node_modules/angular-calendar/scss/modules/common/calendar-tooltip.scss';
+
+%menage-cal-day-badge {
+    background-color: $menage-pink;
+}
+
+%menage-cal-today-header {
+    background-color: $menage-cal-header;
+}
+        
+.cal-month-view {
+    .cal-day-badge {
+        @extend %menage-cal-day-badge;
+    }
+}
+
+.cal-week-view {
+    .cal-header.cal-today {
+        @extend %menage-cal-today-header;
+    }
+    .cal-event {
+        background-color: $menage-cal-event-with-end-date;
+        border-color: $menage-cal-event-with-end-date-border;
+    }
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

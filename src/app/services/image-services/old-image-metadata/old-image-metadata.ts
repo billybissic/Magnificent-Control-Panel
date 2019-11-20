@@ -1,0 +1,77 @@
+export class OldImageMetadata {
+  image_metadata_id: number;
+  image_id: number;
+  image_name: string;
+  image_title: string;
+  image_subject: string;
+  image_rating: number;
+  image_tags: string;
+  image_comments: number;
+  image_date_taken: string;
+  image_program_name: string;
+  image_date_acquired: string;
+  image_copyright: string;
+  image_id_from_meta_data: number;
+  image_dimensions: string;
+  image_width: number;
+  image_height: number;
+  image_horizontal_resolution: string;
+  image_vertical_resolution: string;
+  image_bit_depth: string;
+  image_compression: string;
+  image_resolution_unit: string;
+  image_color_representation: string;
+  image_compressed_bits_pixels: string;
+  image_camera_maker: string;
+  image_camera_model: string;
+  image_f_stop: string;
+  image_exposure_time: string;
+  image_iso_speed: string;
+  image_exposure_bias: string;
+  image_focal_length: string;
+  image_max_apeture: string;
+  image_metering_mode: string;
+  image_subject_distance: string;
+  image_flash_mode: string;
+  image_flash_energy: string;
+  image_35_mm_focal_length: string;
+  image_lense_maker: string;
+  image_lense_model: string;
+  image_flash_maker: string;
+  image_flash_model: string;
+  image_camera_serial_number: string;
+  image_contrast: string;
+  image_brightness: string;
+  image_light_source: string;
+  image_exposure_program: string;
+  image_saturation: string;
+  image_sharpeness: string;
+  image_white_balance: string;
+  image_photometric_interpolation: string;
+  image_digital_zoom: string;
+  image_exif_version: string;
+  image_item_type: string;
+  image_size: string;
+  image_attributes: string;
+  image_owner: number;
+  image_media_type_id: number;
+  image_major_mime_id: number;
+  image_minor_mime_id: number;
+  image_description: string;
+  image_owner_uuid: number;
+  image_user_text: string;
+  image_create_timestamp: string;
+  image_sha1: string;
+  image_caption_id: number;
+  image_style_id: number;
+  image_link_id: number;
+  image_effects_id: number;
+  image_layout_order_number: number;
+  last_changed_timestamp: string;
+  last_changed_by_uuid: number;
+
+  constructor() {
+
+  }
+  
+}

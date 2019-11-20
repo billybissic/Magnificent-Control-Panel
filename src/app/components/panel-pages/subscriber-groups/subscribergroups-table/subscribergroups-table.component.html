@@ -1,0 +1,44 @@
+<div *ngIf="auth.isAuthenticated()">
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Groups">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="subscriber_group_id">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.subscriber_group_id}}</td>
+      </ng-container>
+
+      <!-- Group Name Column -->
+      <ng-container matColumnDef="subscriber_group_name">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.subscriber_group_name}}</td>
+      </ng-container>
+
+      <!-- Group Description -->
+      <ng-container matColumnDef="subscriber_group_description">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Group Desc</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.subscriber_group_description}}</td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th class="data-header" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="fa-icon" mat-cell *matCellDef="let row"><fa-icon [icon]="faTrash" (click)="deleteGroup(row.subscriber_group_id)"></fa-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"
+          (click)="retrieveGroupMembers(row)"></tr>
+    </table>
+
+    <mat-paginator #paginator
+                   [pageIndex]="0"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10]">
+    </mat-paginator>
+  </div>
+</div>

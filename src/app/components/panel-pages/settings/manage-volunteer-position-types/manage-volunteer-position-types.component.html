@@ -1,0 +1,24 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div>
+    <h5>Volunteer Position Types</h5>
+    <form class="position-status-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Type Name" value="Open">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Type Description" value="Position is open and waiting to be filled.">
+      </mat-form-field>
+    </form>
+
+    <div class="submit-button-row">
+      <button mat-flat-button color="primary">Create New Volunteer Position Type</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <app-volunteer-position></app-volunteer-position>
+  </div>
+  <br>
+  <br>
+</div>

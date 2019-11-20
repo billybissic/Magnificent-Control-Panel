@@ -1,0 +1,91 @@
+<div *ngIf="auth.isAuthenticated()">
+  <mat-form-field>
+    <mat-select placeholder="Select a gallery to edit">
+      <mat-option *ngFor="" [value]="">
+
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+      <!--<ng-container matColumnDef="row_name">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Row Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.row.row_name}}</td>
+      </ng-container>-->
+
+      <ng-container matColumnDef="column_1">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Column 1</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">
+          <!--name: {{row.row.column_1.name}}<br>
+          description: {{row.row.column_1.description}}<br>-->
+          <a (click)="viewPhoto(row.row.column_1.name, row.row.column_1.description, row.row.column_1.img_url)">
+            <app-thumbnail-container [img_src]="row.row.column_1.img_url"></app-thumbnail-container>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="column_2">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Column_2</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">
+          <!--name: {{row.row.column_2.name}}<br>
+          description: {{row.row.column_2.description}}<br>-->
+          <a (click)="viewPhoto(row.row.column_2.name, row.row.column_2.description, row.row.column_2.img_url)">
+            <app-thumbnail-container [img_src]="row.row.column_2.img_url"></app-thumbnail-container>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="column_3">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Column_3</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">
+          <!--name: {{row.row.column_3.name}}<br>
+          description: {{row.row.column_2.description}}<br>-->
+          <a (click)="viewPhoto(row.row.column_3.name, row.row.column_3.description, row.row.column_3.img_url)">
+            <app-thumbnail-container [img_src]="row.row.column_3.img_url"></app-thumbnail-container>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="column_4">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Column_4</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">
+          <!--name: {{row.row.column_4.name}}<br>
+          description: {{row.row.column_2.description}}<br>-->
+          <a (click)="viewPhoto(row.row.column_4.name, row.row.column_4.description, row.row.column_4.img_url)">
+            <app-thumbnail-container [img_src]="row.row.column_4.img_url"></app-thumbnail-container>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="column_5">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Column_5</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">
+          <!--name: {{row.row.column_5.name}}<br>
+          description: {{row.row.column_5.description}}<br>-->
+          <a (click)="viewPhoto(row.row.column_5.name, row.row.column_5.description, row.row.column_5.img_url)">
+            <app-thumbnail-container [img_src]="row.row.column_5.img_url">
+            </app-thumbnail-container>
+
+          </a>
+        </td>
+      </ng-container>
+
+      <tr style="display: none;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator
+                   [pageIndex]="0"
+                   [pageSize]="2"
+                   [pageSizeOptions]="[2, 4, 8, 10, 20]">
+    </mat-paginator>
+
+  </div>
+</div>

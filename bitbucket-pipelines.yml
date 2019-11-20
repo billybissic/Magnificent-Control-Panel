@@ -1,0 +1,34 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+#image: node:10.9.0
+image: atlassianlabs/docker-node-jdk-chrome-firefox
+
+pipelines:
+  default:
+    - step:
+        name: Build and Package
+        caches:
+          - node
+        script: # Commands to build the angular package and upload the artifact to repo download.
+          - npm install -g @angular/cli@6.1.5
+          - npm install
+          - ng build --prod
+          - chmod +x *.sh
+          - ./package-build.sh -f "${WEB_PACKAGE_NAME}" -r "${BITBUCKET_BUILD_NUMBER}" -d "${DIST_DIRECTORY}"
+          - curl -X POST --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"${WEB_PACKAGE_NAME}.${BITBUCKET_BUILD_NUMBER}.tar.gz"
+    - step:
+        name: Deploy to Staging Area
+        script: #Commands to deploy the package to the host staging directory
+        - chmod 0400 bitbucket-pipeline_rsa
+        - echo "cd "${STAGING_DIRECTORY}";
+          curl -s -L --user "${BB_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads/${WEB_PACKAGE_NAME}.${BITBUCKET_BUILD_NUMBER}.tar.gz" -o "${WEB_PACKAGE_NAME}.${BITBUCKET_BUILD_NUMBER}.tar.gz"" | ssh -o StrictHostKeyChecking=No -i bitbucket-pipeline_rsa "${USER_ID}@${INSTALL_HOST}"
+    - step:
+        name: Install package
+        script: # Commands to install package in hosts staging directory to target.
+         - chmod 0400 bitbucket-pipeline_rsa
+         - echo "cd /u/data/omni/sys/staging/; tar -xvzf "${WEB_PACKAGE_NAME}.${BITBUCKET_BUILD_NUMBER}.tar.gz"; ls -la;" | ssh -o StrictHostKeyChecking=No -i bitbucket-pipeline_rsa "${USER_ID}@${INSTALL_HOST}"
+          #- echo "cd /u/data/omni/sys/staging/${WEB_PACKAGE_NAME}.${BITBUCKET_BUILD_NUMBER}/install-package.sh " |
+          #| ssh -o StrictHostKeyChecking=No -i bitbucket-pipeline_rsa "${USER_ID}@${INSTALL_HOST}"

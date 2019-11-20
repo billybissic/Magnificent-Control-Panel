@@ -1,0 +1,107 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="jumbotron">
+    <h4>System Environment Variables</h4>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h6>Add New Environment Variable</h6>
+      <div class="row">&nbsp;</div>
+      <div [formGroup]="applicationSettingsForm" class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field class="environment-variable-full-width">
+              <input matInput placeholder="Application Name" formControlName="application_name">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="environment-variable-full-width">
+              <input matInput placeholder="Application Setting Name" formControlName="application_settings_name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <mat-form-field class="environment-variable-full-width">
+            <input matInput placeholder="Description of application setting" formControlName="application_settings_description">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field class="environment-variable-full-width">
+            <input matInput placeholder="Setting Value" formControlName="application_settings_value">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <button class="btn btn-block btn-secondary" (click)="addNewApplicationSetting()">Add New Environment Variable</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-block btn-secondary" type="reset">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+      <ng-container matColumnDef="applicationSettingsId">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.applicationSettingsId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="applicationName">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Application Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.applicationName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="applicationSettingName">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Setting Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.applicationSettingName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="applicationSettingDescription">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Setting Description</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.applicationSettingDescription}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="applicationSettingValue">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Setting Value</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.applicationSettingValue}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastChangedTimestamp">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.lastChangedTimestamp}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastModifiedUserid">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Modified By</th>
+        <td class="data-cell" mat-cell *matCellDef="let row;">{{row.lastModifiedUserid}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th class="data-header" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="fa-icon" mat-cell *matCellDef="let row"><fa-icon [icon]="faEdit" (click)="editRecord(row.inquiry_id)"></fa-icon> &nbsp;<fa-icon [icon]="faTrash" (click)="deleteRecord(row.applicationSettingsId)"></fa-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          class="element-row"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50, 100, 250]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+
+  <div class="row">&nbsp;</div>
+</div>

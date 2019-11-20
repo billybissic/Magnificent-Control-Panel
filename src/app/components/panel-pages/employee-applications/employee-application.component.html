@@ -1,0 +1,354 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>Employment Applications</h1>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="employmentApplicationForm">
+          <div class="form-row">
+            <div class="col">
+              <h6>Application For Employment</h6>
+            </div>
+            <div class="col-sm-3">
+              <p class="application-xs">We are an Equal Opportunity Employer and committed to excellence through diversity.</p>
+            </div>
+            <div class="col-sm-3">
+              <p class="application-xs">The application must be fully completed to be considered. Please complete each
+                section even if you attach a resume.</p>
+            </div>
+          </div>
+          <h6>Personal Information</h6>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="firstName" class="form-control application-lg" type="text" placeholder="First Name">
+            </div>
+            <div class="col">
+              <input formControlName="lastName" class="form-control application-lg" type="text" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="address" class="form-control application-lg" type="text" placeholder="Address">
+            </div>
+            <div class="col">
+              <input formControlName="city" class="form-control application-lg" type="text" placeholder="City">
+            </div>
+            <div class="col">
+              <input formControlName="state" class="form-control application-lg" type="text" placeholder="State">
+            </div>
+            <div class="col">
+              <input formControlName="zip" class="form-control application-lg" type="text" placeholder="Zip">
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="phoneNumber" class="form-control application-lg" type="tel" placeholder="(###) ###-####">
+            </div>
+            <div class="col">
+              <input formControlName="emailAddress" class="form-control application-lg" type="email" placeholder="email.address@mail.com">
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <p class="application-lg">Are you legally eligible to work in the US?</p>
+              <div class="row">
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">Yes</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <p class="application-lg">Are you a veteran?</p>
+              <div class="row">
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade" class="application-lg">Yes</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade" class="application-lg">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <p class="application-lg">If selected for employment are you willing to submit to a background check?</p>
+              <div class="row">
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">Yes</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <h6>Position</h6>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="col">
+                  <div class="application-lg">
+                    Position you are applying for
+                  </div>
+                  <select class="form-control application-lg" [formControlName]="'desiredPosition'">
+                    <option>Select One</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <div class="application-lg">
+                    Available start date
+                  </div>
+                  <input formControlName="availableStartDate" type="date" class="form-control application-lg">
+                </div>
+                <div class="col">
+                  <div class="application-lg">
+                    Desired pay
+                  </div>
+                  <input formControlName="desiredPay" type="text" class="form-control application-lg">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <p class="application-lg">Employment desired</p>
+              <div class="form-row">
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox" id="ade">
+                    <label class="application-label" for="ade">Full Time</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox" id="ade2">
+                    <label class="application-label" for="ade2">Part Time</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox" id="ade3">
+                    <label class="application-label" for="ade3">Seasonal/Temporary</label>
+                  </div>
+                </div>
+                <div class="col">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <h6>Education</h6>
+            </div>
+          </div>
+          <div class="col">&nbsp;</div>
+          <!-- education history array -->
+          <div formArrayName="educationInstances" *ngFor="let educationInstance of employmentApplicationForm.get('educationInstances')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="schoolName" placeholder="School Name">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="location" placeholder="Location">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="yearsAttended" placeholder="Years Attended">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="degreeReceived" placeholder="Degree">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="major" placeholder="Major">
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="deleteEducationInstance(i)">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                  </button>
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="addEducationInstance()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of education history array -->
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <h6>References</h6>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <!-- employee reference array -->
+          <div formArrayName="employeeReferenceInstances" *ngFor="let employeeReferenceInstance of employmentApplicationForm.get('employeeReferenceInstances')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="name" placeholder="Name">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="title" placeholder="Title">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="company" placeholder="Company">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="phone" placeholder="phone">
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="deleteEmployeeReferenceInstance(i)">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                  </button>
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="addEmployeeReferenceInstance()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <!-- end of employee reference array -->
+          <div class="form-row">
+            <div class="col">
+              <h6>Employment History</h6>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <!-- employment history array -->
+          <div formArrayName="employmentHistoryInstances" *ngFor="let employmentHistoryInstance of employmentApplicationForm.get('employmentHistoryInstances')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="employer" placeholder="Employer">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="jobTitle" placeholder="Job Title">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="date" formControlName="startingDate" placeholder="Starting Date">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="date" formControlName="endingDate" placeholder="End Date">
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="deleteEmploymentHistoryInstance(i)">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                  </button>
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="addEmploymentHistoryInstance()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="form-row">&nbsp;</div>
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="workPhone" placeholder="Work Phone">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="startingPayRate" placeholder="Starting Pay">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="endingPayRate" placeholder="Ending Pay">
+                </div>
+              </div>
+              <div class="form-row">&nbsp;</div>
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="address" placeholder="Address">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="city" placeholder="City">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="state" placeholder="State">
+                </div>
+                <div class="zip">
+                  <input class="form-control application-lg" type="text" formControlName="zip" placeholder="Zip">
+                </div>
+              </div>
+              <div class="form-row">&nbsp;</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5>Pending Applications</h5>
+        <div class="row">&nbsp;</div>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <select class="form-control">
+                <option>Change Search Option</option>
+              </select>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+              <div class="table-responsive table-y-scroll">
+                <table class="table table-hover">
+                  <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><input type="checkbox" value="1"/></th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Birthday</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

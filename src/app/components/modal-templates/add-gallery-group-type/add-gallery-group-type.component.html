@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="card card-fluid">
+    <div class="card-body">
+      <span class="form-title">Gallery Group Type</span>
+      <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+        <div [formGroup]="galleryGroupTypeForm" class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="groupTypeName" type="text" class="form-control" placeholder="Group Type Name">
+            </div>
+            <div class="col-7">
+              <input formControlName="groupTypeDescription" type="text" class="form-control" placeholder="Group Type Description">
+            </div>
+          </div>
+          <div class="form-row">
+            &nbsp;
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <select class="form-control" formControlName="groupTypeMimeTypeGroup">
+                <option selected disabled hidden value="0">Choose Mime Type Group</option>
+                <option value="{{mimeType.mime_type_group_id}}" *ngFor="let mimeType of mimeTypeGroups">{{mimeType.mime_type_group_name}}</option>
+              </select>
+            </div>
+            <div class="col-1">
+              <button type="submit" class="form-control btn-secondary" >
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">&nbsp;</div>
+
+<div class="row">
+  <div class="table-responsive table-y-scroll table-x-scroll">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;" class="col-header">Gallery Group Type</th>
+          <th style="width: 300px; white-space: nowrap;" class="col-header">Gallery Group Type Description</th>
+          <th class="col-header">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let groupType of galleryGroupTypes">
+          <td>{{groupType.id}}</td>
+          <td>{{groupType.galleryGroupTypeName}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{groupType.galleryGroupTypeDescription}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryGroupType(groupType.id)" type="button" class="btn btn-secondary btn-sm">
+            <div style="text-align:center">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

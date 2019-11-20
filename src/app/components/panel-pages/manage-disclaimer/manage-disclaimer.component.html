@@ -1,0 +1,63 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="jumbotron">
+    <h1>{{Mode}} Disclaimer</h1>
+  </div>
+
+  <div [ngSwitch]="Mode">
+    <div *ngSwitchCase="'Previewing'">
+      <!-- Beginning of Preview Components -->
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-fluid">
+              <div class="card-body">
+                <div [innerHTML]="disclaimer.documentContent">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col">
+          <button class="form-control btn-secondary" (click)="showEditMode()">Edit</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- Ending Preview Components -->
+
+    <!-- Editing Components-->
+    <div *ngSwitchCase="'Editing'">
+      <div class="row">
+        <div class="col">
+          <div class="card-fluid">
+            <ckeditor [(ngModel)]="model.editorData" [editor]="Editor"></ckeditor>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        &nbsp;
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="form-control btn-secondary">Save</button>
+        </div>
+        <div class="col">
+          <button class="form-control btn-secondary">Save & Preview</button>
+        </div>
+        <div class="col">
+          <button class="form-control btn-secondary" (click)="showPreviewMode()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ending of Editing Components -->
+  <br>
+</div>

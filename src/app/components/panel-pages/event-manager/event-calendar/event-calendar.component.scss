@@ -1,0 +1,25 @@
+.inline-field input,
+.inline-field label {
+  display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 11px;
+  line-height: 12px;
+  padding: 3px;
+  margin-bottom: 0; /* I added this after I posted my reply */
+  vertical-align: middle; /* Fixes any weird issues in Firefox and IE */
+}
+.input-group {
+    margin-top: 40px;
+}
+
+.date-label {
+    margin-top: 46px;
+}
+
+.container {
+    box-shadow: 0, 5px, 10px, rgba(0, 0, 0, 0.603);
+}
+
+input[type="file"] {
+    display: none;
+}

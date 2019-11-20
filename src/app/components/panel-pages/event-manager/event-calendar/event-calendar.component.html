@@ -1,0 +1,359 @@
+<div *ngIf="auth.isAuthenticated()">
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Modify Event : {{ modalData?.event.title }} </h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Beginning of Form -->
+    <div [formGroup]="eventScheduler" class="form-group">
+        <div class="form-row">
+
+            <div class="col-6">
+              <button type="button" class="form-control btn-secondary" (click)="enableFormControls()">Edit</button>
+            </div>
+            <div class="col-6">
+              <button type="button" (click)="close()" class="form-control btn-secondary">Cancel</button>
+            </div>
+
+        </div>
+        <div class="form-row">
+          &nbsp;
+        </div>
+        <div class="form-row">
+          <div class="col-12">
+            <input formControlName="eventTitle" [value]="modalData?.event.title" type="text" class="form-control" placeholder="Title (Required)">
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-12">
+            <input formControlName="eventDescription" [value]="modalData?.event.meta.details.description" type="text" class="form-control" placeholder="Description (Required)">
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-9">
+            <input formControlName="eventImage" class="form-control" placeholder="Select Image to Upload" type="text">
+          </div>
+          <div class="col-3">
+            <label id="#bb" class="btn form-control btn-secondary">Browse
+              <input disabled="checkBoxEditable" type="file" id="File" size="60" [(ngModel)]="eventUpload" (change)="updateFile()" [ngModelOptions]="{standalone: true}">
+              </label>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-6">
+            <label>Host:</label>
+            <input formControlName="eventHost" placeholder="Event Host (Required)" class="form-control" [value]="modalData?.event.meta.details.host">
+          </div>
+          <br>
+          <div class="col-6">
+            <label>Location:</label>
+            <input formControlName="eventLocation" placeholder="Address (Required)" class="form-control" [value]="modalData?.event.meta.details.location">
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-6">
+            <!--<label>Event Type</label>-->
+            <select formControlName="eventType" class="form-control" (ngModelChange)="setColors()">
+              <option value="" selected disabled hidden>Select Event Type</option>
+              <option *ngFor="let type of eventTypes" [ngValue]="type">{{type.event_type_name}}</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <!--<label>Event Frequency</label>-->
+            <select formControlName="eventFrequency" class="form-control">
+              <option value="" selected disabled hidden>Select Event Frequency</option>
+              <option *ngFor="let frequency of eventFrequencies" [value]="frequency.event_frequency_id">{{frequency.event_frequency_name}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="col-5">
+            <label>Primary Color:</label>
+            <input
+              [disabled]="! isEnabled"
+              class="form-control"
+              [style.background]="primaryColor"
+              [cpAlphaChannel]="'always'"
+              [cpOutputFormat]="'hex'"
+              [cpSaveClickOutside]="'true'"
+              [(cpToggle)]="primaryToggle"
+              [(colorPicker)]="primaryColor"/>
+          </div>
+          <div class="col-1">
+            <label>&nbsp;</label>
+            <button
+              [disabled]="!isEnabled"
+              #ignoredButton
+              class="form-control btn-secondary"
+              (click)="primaryToggle=!primaryToggle">
+              <fa-icon [icon]="faPalette"></fa-icon>
+            </button>
+          </div>
+          <div class="col-5">
+            <label>Secondary Color:</label>
+            <input
+              [disabled]="! isEnabled"
+              class="form-control"
+              [style.background]="secondaryColor"
+              [cpAlphaChannel]="'always'"
+              [cpOutputFormat]="'hex'"
+              [cpSaveClickOutside]="'true'"
+              [(cpToggle)]="secondaryToggle"
+              [(colorPicker)]="secondaryColor"/>
+          </div>
+          <div class="col-1">
+            <label>&nbsp;</label>
+            <button
+              [disabled]="! isEnabled"
+              #ignoredButton
+              class="form-control btn-secondary"
+              (click)="secondaryToggle=!secondaryToggle">
+              <fa-icon [icon]="faPalette"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <label class="date-label">Start: </label>
+          <div class="col-5">
+            <div class="input-group">
+              <input
+                [(ngModel)]="startDateModel"
+                (navigate)="modelStartDate = $event.next"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                ngbDatepicker
+                [disabled]="! isEnabled"
+                class="form-control"
+                #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button [disabled]="isEditable" class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                    <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="col-5">
+            <fieldset [disabled]="! isEnabled">
+              <ngb-timepicker
+                [(ngModel)]="startTime"
+                [ngModelOptions]="{standalone: true}"
+                [seconds]="true"
+                [spinners]="true"
+                [hourStep]="hourStep"
+                [minuteStep]="minuteStep"
+                [secondStep]="secondStep"
+                [meridian]="true">
+              </ngb-timepicker>
+            </fieldset>
+          </div>
+        </div>
+        <br>
+
+        <div class="form-row">
+          <label class="date-label">End: &nbsp;</label>
+          <div class="col-5">
+            <div class="input-group">
+              <input [(ngModel)]="endDateModel"
+              (navigate)="modelEndDate = $event.next"
+              [ngModelOptions]="{standalone: true}"
+              [disabled]="! isEnabled"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp2"
+              ngbDatepicker
+              #d2="ngbDatepicker">
+              <div class="input-group-append">
+                <button [disabled]="! isEnabled" class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">
+                  <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="col-5">
+            <fieldset [disabled]="! isEnabled">
+            <ngb-timepicker readonly-input="isReadOnly" [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}" [seconds]="seconds" [spinners]="spinners"
+              [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep" [meridian]="meridian"></ngb-timepicker>
+            </fieldset>
+          </div>
+        </div>
+        <br>
+
+        <div class="form-row">
+
+        <!--<div class="form-row">-->
+        <div class="col">
+          <div class="inline-field">
+            <input [disabled]="! isEnabled" type="checkbox" id="ade" [(ngModel)]="model.allDay" [ngModelOptions]="{standalone: true}">
+            <label for="ade">All Day Event</label>
+          </div>
+        </div>
+
+        <div class="col">
+        <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input [disabled]="! isEnabled" type="checkbox" id="rbs" [(ngModel)]="model.resizableStart" [ngModelOptions]="{standalone: true}">
+            <label for="rbs">Resizable Start</label>
+          </div>
+        </div>
+
+        <div class="col">
+        <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input [disabled]="! isEnabled" type="checkbox" id="ras" [(ngModel)]="model.resizableEnd" [ngModelOptions]="{standalone: true}">
+            <label for="ras">Resizable Ending</label>
+          </div>
+        </div>
+
+        <div class="col">
+        <!--<div class="form-row">-->
+          <div class="inline-field">
+            <input [disabled]="! isEnabled" type="checkbox" id="draggable" [(ngModel)]="model.draggable" [ngModelOptions]="{standalone: true}">
+            <label for="draggable">Draggable</label>
+          </div>
+        </div>
+        </div>
+        <br>
+        <div class="form-row">
+
+          <div class="col-6">
+            <button [disabled]="! isEnabled"
+            (click)="updateEvent(modalData?.event)"
+            class="form-control btn-secondary">Save</button>
+          </div>
+
+          <div class="col-6">
+            <button [disabled]="! isEnabled"
+            (click)="deleteEvent(modalData?.event)"
+            class="form-control btn-secondary">Delete</button>
+          </div>
+
+        </div>
+      </div>
+    <!-- End of Form-->
+
+
+    <!--<div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>-->
+    <div>
+      <!--Event:
+      <pre>{{ modalData?.event | json }}</pre>-->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!--<button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>-->
+  </div>
+</ng-template>
+
+<br>
+
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-secondary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Previous
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Today
+      </div>
+      <div
+        class="btn btn-secondary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Next
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-secondary"
+        (click)="view = CalendarView.Month"
+        [class.active]="view === CalendarView.Month">
+        Month
+      </div>
+      <div
+        class="btn btn-secondary"
+        (click)="view = CalendarView.Week"
+        [class.active]="view === CalendarView.Week">
+        Week
+      </div>
+      <div
+        class="btn btn-secondary"
+        (click)="view = CalendarView.Day"
+        [class.active]="view === CalendarView.Day">
+        Day
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-day-view>
+  </div>
+
+  <br><br><br>
+<!--
+<br><br><br>
+<h3>
+  Edit events
+  <button
+  class="btn btn-primary pull-right"
+  (click)="addEvent()">
+    Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>-->
+</div>

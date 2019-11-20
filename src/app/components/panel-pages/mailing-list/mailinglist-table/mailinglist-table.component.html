@@ -1,0 +1,48 @@
+<div *ngIf="auth.isAuthenticated()">
+  <mat-form-field>
+    <input matNativeControl matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+      <!-- Id Column -->
+      <ng-container matColumnDef="subscriberId">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.subscriberId}}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.firstName}}</td> <!--, {{row.last_name}}</td>-->
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="subscriberEmail">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.subscriberEmail}}</td>
+      </ng-container>
+
+      <!-- Birthday Column -->
+      <ng-container matColumnDef="birthDay">
+        <th class="data-header" mat-header-cell *matHeaderCellDef mat-sort-header>Birthday</th>
+        <td class="data-cell" mat-cell *matCellDef="let row">{{row.birthDay}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th class="data-header" mat-header-cell *matHeaderCellDef>Actions</th>
+        <td class="fa-icon" mat-cell *matCellDef="let row"><fa-icon [icon]="faEdit" (click)="editRecord(row.subscriberId)"></fa-icon> &nbsp;<fa-icon [icon]="faTrash" (click)="deleteConfirmation(row)"></fa-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"></tr>
+    </table>
+
+    <mat-paginator #paginator
+                   [pageIndex]="0"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 25, 50, 100, 250]">
+    </mat-paginator>
+  </div>
+</div>

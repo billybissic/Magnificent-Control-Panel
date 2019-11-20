@@ -1,0 +1,269 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>Entertainer Application</h1>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="employmentApplicationForm">
+          <div class="form-row">
+            <div class="col">
+              <h6>Application For Employment</h6>
+            </div>
+            <div class="col-sm-3">
+              <p class="application-xs">We are an Equal Opportunity Employer and committed to excellence through diversity.</p>
+            </div>
+            <div class="col-sm-3">
+              <p class="application-xs">The application must be fully completed to be considered. Please complete each
+                section even if you attach a resume.</p>
+            </div>
+          </div>
+          <h6>Personal Information</h6>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="firstName" class="form-control application-lg" type="text" placeholder="First Name">
+            </div>
+            <div class="col">
+              <input formControlName="lastName" class="form-control application-lg" type="text" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="address" class="form-control application-lg" type="text" placeholder="Address">
+            </div>
+            <div class="col">
+              <input formControlName="city" class="form-control application-lg" type="text" placeholder="City">
+            </div>
+            <div class="col">
+              <input formControlName="state" class="form-control application-lg" type="text" placeholder="State">
+            </div>
+            <div class="col">
+              <input formControlName="zip" class="form-control application-lg" type="text" placeholder="Zip">
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <input formControlName="phone" class="form-control application-lg" type="tel" placeholder="(###) ###-####">
+            </div>
+            <div class="col">
+              <input formControlName="driversLicense" class="form-control application-lg" type="text" placeholder="State ID/Drivers License">
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <p class="application-lg">Note, dancers must be at least 21 years of age.</p>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-row">
+                <p style="vertical-align: bottom; margin-bottom: auto;" class="application-lg">Birthday</p>
+              </div>
+              <div class="form-row">
+                <input formControlName="birthday" class="form-control application-lg" type="date" placeholder="Birthday">
+              </div>
+            </div>
+            <div class="col-xs">&nbsp;</div>
+            <div class="col">
+              <div class="form-row">
+                <p class="application-lg" style="vertical-align: bottom; margin-bottom: auto">Age</p>
+              </div>
+              <div class="form-row">
+                <input formControlName="age" class="form-control application-lg" type="text" placeholder="0">
+              </div>
+            </div>
+            <div class="col-xs">&nbsp;</div>
+            <div class="col">
+              <div class="form-row">
+                <p class="application-lg" style="vertical-align: bottom; margin-bottom: auto;">&nbsp;</p>
+              </div>
+              <div class="form-row">
+                <select class="form-control application-lg">
+                  <option>Highest Level of Education</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <div class="col">
+              <h6>Emergency Contact</h6>
+            </div>
+          </div>
+          <div formArrayName="emergencyContactInstances" *ngFor="let emergencyInstance of employmentApplicationForm.get('emergencyContactInstances')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="emergencyFirstName" placeholder="First Name">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="text" formControlName="emergencyLastName" placeholder="Last Name">
+                </div>
+                <div class="col">
+                  <input class="form-control application-lg" type="tel" formControlName="emergencyPhone" placeholder="(###) ###-####">
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="deleteEmergencyContactInstance(i)">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                  </button>
+                </div>
+                <div class="col-xs">
+                  <button class="btn-sm btn-secondary" (click)="addEmergencyContactInstance()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <!-- end of employee reference array -->
+          <div class="form-row">
+            <div class="col">
+              <h6>Employment History</h6>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <p class="application-lg">Have you ever danced before?</p>
+              <div class="row">
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">Yes</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="inline-field">
+                    <input type="checkbox">
+                    <label for="ade">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">&nbsp;</div>
+          <div class="form-row">
+            <p class="application-lg">If yes, please provide previous location information. </p>
+          </div>
+          <div class="form-row">
+            <div formArrayName="entertainerExperienceInstances" *ngFor="let entertainterExperienceInstance of employmentApplicationForm.get('entertainerExperienceInstances')['controls']; let i = index;">
+              <div [formGroupName]="i">
+                <div class="form-row">
+                  <div class="col">
+                    <input class="form-control application-lg" type="text" formControlName="venue" placeholder="Club Name">
+                  </div>
+                  <div class="col">
+                    <input class="form-control application-lg" type="text" formControlName="city" placeholder="City">
+                  </div>
+                  <div class="col">
+                    <input class="form-control application-lg" type="text" formControlName="state" placeholder="State">
+                  </div>
+                  <div class="col-xs">
+                    <button class="btn-sm btn-secondary application-lg" (click)="deleteEntertainerExperienceInstance(i)">
+                      <fa-icon [icon]="faMinus"></fa-icon>
+                    </button>
+                  </div>
+                  <div class="col-xs">
+                    <button class="btn-sm btn-secondary application-lg" (click)="addEntertainerExperienceInstance()">
+                      <fa-icon [icon]="faPlus"></fa-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-row">&nbsp;</div>
+                <div class="form-row">
+                  <div class="col">
+                    <input class="form-control application-lg" type="text" formControlName="lengthOfEmploymentYears" placeholder="Years Employed">
+                  </div>
+                  <div class="col">
+                    <input class="form-control application-lg" type="text" formControlName="lengthOfEmploymentMonths" placeholder="Months Employed">
+                  </div>
+                  <div class="col">&nbsp;</div>
+                  <div class="col">&nbsp;</div>
+                </div>
+              </div>
+              <div class="form-row">&nbsp;</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h6>Optional</h6>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <p class="application-lg">You may upload up to two photos, but not a requirement. When uploading photos, nudes are not required.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body" style="margin: 0px; padding: 0px; flex: none; text-align: center;">
+                  <div class="container">
+                    <fa-icon [icon]="faImage" style="font-size: 12em; color: gray; padding: 0px; line-height: 0px; margin: 0px;"></fa-icon>
+                  </div>
+                </div>
+              </div>
+              <button (click)="fileInput.click()" class="btn btn-secondary application-lg form-control">sel</button>
+              <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+                  <input type="file" #fileInput ng2FileSelect [uploader]="uploader" />
+                </span>
+              <!--<input type="file" ng2FileSelect [uploader]="uploader" />-->
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body" style="margin: 0px; padding: 0px; flex: none; text-align: center;">
+                  <fa-icon [icon]="faImage" style="font-size: 18em; color: gray; padding: 0px; line-height: 0px; margin: 0px;"></fa-icon>
+                </div>
+              </div>
+              <button (click)="fileInput.click()" class="btn btn-secondary application-lg form-control">Upload</button>
+              <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+                  <input type="file" #fileInput ng2FileSelect [uploader]="uploader" />
+                </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5>Pending Applications</h5>
+        <div class="row">&nbsp;</div>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <select class="form-control">
+                <option>Change Search Option</option>
+              </select>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+              <div class="table-responsive table-y-scroll">
+                <table class="table table-hover">
+                  <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><input type="checkbox" value="1"/></th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Birthday</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

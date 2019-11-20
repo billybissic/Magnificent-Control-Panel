@@ -1,0 +1,23 @@
+.container-fluid {
+  padding-top: 1.4em;
+  padding-bottom: 1.4em;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+img {
+  height: 160px;
+  width: 125px;
+  border-style: solid !important;
+  border-color: deeppink !important;
+  border: 2px;
+}
+
+img:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+  transition-timing-function: ease-in-out;
+  border: 2px;
+  border-color: #fd00fa;
+  cursor: pointer;
+}

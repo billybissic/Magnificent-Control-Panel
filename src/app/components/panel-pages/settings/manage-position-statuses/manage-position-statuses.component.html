@@ -1,0 +1,24 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div>
+    <h5>Employment Position Statuses</h5>
+    <form class="position-status-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Status Name" value="Open">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Status Description" value="Position is open and waiting to be filled.">
+      </mat-form-field>
+    </form>
+
+    <div class="submit-button-row">
+      <button mat-flat-button color="primary">Create New Position Status</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <app-position-statuses></app-position-statuses>
+  </div>
+  <br>
+  <br>
+</div>

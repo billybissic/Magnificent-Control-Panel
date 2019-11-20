@@ -1,0 +1,245 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light drop-shadow">
+  <a class="navbar-brand pb-2" routerLink="/">Control Panel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Event Planning Menu - Start -->
+        <button mat-button [matMenuTriggerFor]="eventPlanning">Event Planning</button>
+
+        <mat-menu #eventPlanning="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="eventScheduling">Event Scheduling</button>
+        </mat-menu>
+
+        <mat-menu #eventScheduling="matMenu">
+          <button mat-menu-item (click)="routeToEventScheduler()">Event Scheduler</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToEventCalendar()">Event Calendar</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToEventFlyers()">Event Flyers</button>
+        </mat-menu>
+        <!-- Event Planning Menu - End -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Customer Interactions -->
+        <button mat-button [matMenuTriggerFor]="customerInteractions">Customer Interactions</button>
+
+        <mat-menu #customerInteractions="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="mailingList">Manage Mailing List</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="manageReservations">Manage Reservations</button>
+        </mat-menu>
+
+        <mat-menu #mailingList="matMenu">
+          <button mat-menu-item (click)="routeToSubscriberGroups()">Manage Subscriber Groups</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToSubscribers()">Manage Subscribers</button>
+        </mat-menu>
+
+        <mat-menu #manageReservations="matMenu">
+          <button mat-menu-item (click)="routeToReservationInquiries()">Reservation Inquiries</button>
+        </mat-menu>
+        <!-- End Customer Interactions -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Content Management -->
+        <button mat-button [matMenuTriggerFor]="contentManagement">Content Management</button>
+
+        <mat-menu #contentManagement="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="entertainerContent">Manage Entertainer Content</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="photoGalleries">Manage Photo Galleries</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="legalDocuments">Manage Legal Documents</button>
+        </mat-menu>
+
+        <mat-menu #entertainerContent="matMenu">
+          <button mat-menu-item (click)="routeToManageBiographies()">Manage Biographies</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToManageGalleries()">Manage Galleries</button>
+        </mat-menu>
+
+        <mat-menu #photoGalleries="matMenu">
+          <button mat-menu-item (click)="routeToCreateGallery()">Create Gallery</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToGalleryViewer()">Gallery Viewer</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToGalleryStats()">Gallery Stats</button>
+        </mat-menu>
+
+        <mat-menu #legalDocuments="matMenu">
+          <button mat-menu-item (click)="routeToContentWarning()">Content Warning</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToDisclaimer()">Disclaimer</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToPrivacyPolicy()">Privacy Policy</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToTermsOfService()">Terms Of Service</button>
+        </mat-menu>
+        <!-- End of Content Management -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Management Menu - Start -->
+        <button mat-button [matMenuTriggerFor]="management">Management</button>
+
+        <mat-menu #management="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="manageWorkforce">Manage Workforce</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="manageApplications">Manage Applications</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="employeeApplications">Applications</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="openPositions">Positions</button>
+        </mat-menu>
+
+        <mat-menu #manageWorkforce="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="timeAndAttendance">Time & Attendance</button>
+        </mat-menu>
+
+        <mat-menu #openPositions="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="openPositions">Manage Positions</button>
+        </mat-menu>
+
+        <mat-menu #manageApplications="matMenu">
+          <button mat-menu-item (click)="routeToManageBartenderApplication()">Bartender Applications</button>
+          <button mat-menu-item (click)="routeToManageEntertainerApplication()">Entertainer Applications</button>
+        </mat-menu>
+        <mat-menu #timeAndAttendance="matMenu">
+          <button mat-menu-item (click)="routeToTABartenders()">Bartenders</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToTAEntertainers()">Entertainers</button>
+        </mat-menu>
+
+        <mat-menu #employeeApplications="matMenu">
+          <button mat-menu-item (click)="routeToBartenderApplications()">Bartender Applications</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToEntertainerApplications()">Entertainer Applications</button>
+        </mat-menu>
+
+        <mat-menu #openPositions="matMenu">
+          <button mat-menu-item (click)="routeToOpenPositions()">Create New Position</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="routeToManagePositions()">Manage Positions</button>
+        </mat-menu>
+        <!-- Management Menu End -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Reports Menu Start -->
+        <button mat-button>Reports</button>
+        <!-- Reports Menu End -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!--Security Menu Start -->
+        <button mat-button [matMenuTriggerFor]="security">Security</button>
+
+        <mat-menu #security="matMenu">
+          <button mat-menu-item>User Management</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>Menu Access</button>
+        </mat-menu>
+        <!-- Security Menu End -->
+      </div>
+
+      <div *ngIf="auth.isAuthenticated()">
+        <!-- Application Settings Menu Begin -->
+        <button mat-button [matMenuTriggerFor]="settings">Settings</button>
+
+        <mat-menu #settings="matMenu">
+          <button mat-menu-item (click)="routeToEnvironmentVariables()">Environment Variables</button>
+          <button mat-menu-item [matMenuTriggerFor]="contentManagementSettings">Content Management</button>
+          <button mat-menu-item (click)="routeToWidgetSettings()">Widget Settings</button>
+          <button mat-menu-item [matMenuTriggerFor]="employmentManagementSettings">Employment Management</button>
+          <button mat-menu-item (click)="routeToTestModals()">Test Modals</button>
+        </mat-menu>
+
+        <mat-menu #employmentManagementSettings="matMenu">
+          <button mat-menu-item (click)="routeToManageApplicationTypes()">Employment Application Types</button>
+          <button mat-menu-item (click)="routeToManageArrangementTypes()">Employment Arrangement Types</button>
+          <button mat-menu-item (click)="routeToManagePositionStatuses()">Employment Position Status</button>
+          <button mat-menu-item (click)="routeToManagePositionTypes()">Employment Position Types</button>
+          <button mat-menu-item (click)="routeToManageVolunteerPositions()">Volunteer Position Types</button>
+        </mat-menu>
+
+        <mat-menu #contentManagementSettings="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="photoGallerySettings">Photo Gallery</button>
+          <button mat-menu-item [matMenuTriggerFor]="calendarSettings">Calendar</button>
+          <button mat-menu-item [matMenuTriggerFor]="reservationSettings">Reservations</button>
+        </mat-menu>
+
+        <mat-menu #photoGallerySettings="matMenu">
+          <button mat-menu-item (click)="routeToGalleryConfigurations()">Gallery Configurations</button>
+        </mat-menu>
+
+        <mat-menu #calendarSettings="matMenu">
+          <button mat-menu-item (click)="routeToEventConfigurations()">Event Configurations</button>
+        </mat-menu>
+
+        <mat-menu #reservationSettings="matMenu">
+          <button mat-menu-item (click)="routeToReservationsConfigurations()">Reservation Configurations</button>
+        </mat-menu>
+        <!-- Application Settings Menu End -->
+      </div>
+
+    </ul>
+  </div>
+  <ng-template #popContent>
+    <div class="card">
+      <div class="card-header">Hello, <b>{{name}}</b>!</div>
+      <div class="card-body">
+        <button id="qsLoginBtn"
+                class="form-control btn btn-secondary"
+                *ngIf="!auth.isAuthenticated()"
+                (click)="auth.login()" type="button">
+          Log In
+        </button>
+
+        <button id="qsLogoutBtn"
+                class="btn btn-secondary my-2 my-sm-0"
+                *ngIf="auth.isAuthenticated()"
+                (click)="auth.logout()" type="button">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--<button type="button" class="btn btn-secondary" [ngbPopover]="popContent" popoverTitle="Fancy content" placement="bottom">
+    I've got markup and bindings in my popover!
+  </button>-->
+ <div class="login" [ngbPopover]="popContent" popoverTitle="User Details" placement="left" container="body" > <!-- (click)="checkForProfile()"> -->
+   <fa-icon [icon]="faUserCircle"></fa-icon>
+ </div>
+
+  <div class="dropdown-menu">
+    <form class="px-4 py-3">
+      <div class="form-group">
+        <label for="exampleDropdownFormEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label for="exampleDropdownFormPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+        <label class="form-check-label" for="dropdownCheck">
+          Remember me
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">New around here? Sign up</a>
+    <a class="dropdown-item" href="#">Forgot password?</a>
+  </div>
+
+
+</nav>

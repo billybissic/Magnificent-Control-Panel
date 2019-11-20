@@ -1,0 +1,58 @@
+.action-text {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    font-variant-caps: all-small-caps;
+}
+.va-bottom {
+    padding-top: 10px;
+    vertical-align: bottom;
+}
+
+.jumbotron-fluid {
+    padding-left: 10px;
+}
+
+
+.form-row {
+    width: 100px;
+}
+
+.table td, .table th {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+}
+
+.table {
+    padding-bottom: 0px;
+}
+
+.table-responsive {
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.page-heading {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    font-variant-caps: all-small-caps;
+    vertical-align: bottom;
+}
+
+.table-y-scroll {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+#searchInput {
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }

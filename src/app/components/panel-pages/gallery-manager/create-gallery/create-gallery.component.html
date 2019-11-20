@@ -1,0 +1,147 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="col">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Let's get started!</h1>
+        <p class="lead">Begin by creating a new album.</p>
+        <form (ngSubmit)="onSubmit()">
+          <div [formGroup]="galleryForm" class="form-group">
+            <input
+              type="text"
+              formControlName="galleryname"
+              class="form-control"
+              id="galleryTitle"
+              aria-describedby="galleryTitleHelp"
+              placeholder="Enter a title for your new gallery.">
+            <small id="galleryTitleHelp" class="form-text text-muted"></small>
+            {{galleryForm.controls.galleryname.value}}
+            <input
+              type="text"
+              formControlName="gallerydescription"
+              class="form-control"
+              id="galleryDescription"
+              placeholder="Briefly describe your new gallery.">
+            {{galleryForm.controls.gallerydescription.value}}
+            <!--</div> end of form group-->
+            <!--Additional Configurations Button-->
+            <br>
+            <button
+              type="button"
+              class="btn btn-dark btn-block"
+              (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed"
+              aria-controls="collapseBasic">
+              Additional Configurations
+            </button>
+            <!-- End of Additional Configurations Button -->
+            <hr>
+            <!-- End of Collaspable Content -->
+            <div id="collapseBasic" [collapse]="isCollapsed" class="card card-block card-header">
+              <h3 class="display-6">Let's tweak {{galleryForm.controls.galleryname.value}} some more!</h3>
+              <div class="well well-lg">The options below are not required to create a new album. Defaults are already set for your convience.
+                      However, if you choose to you can modify the gallery further.
+
+                  <!-- Begin Gallery Privacy/Publication -->
+                  <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm"></div>
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                      <!--<div class="form-group">-->
+                        <button
+                          type="button"
+                          class="btn btn-primary float-right"
+                          btnCheckbox
+                          btnCheckboxTrue="1"
+                          btnCheckboxFalse="0"
+                          (click)="privacyToggle()"
+                          tooltip="By default the gallery is private. It is recommended to keep private until the gallery has been groomed.">
+                          {{privacyButtonText}}
+                        </button>
+                      <!--</div>-->
+                    </div>
+                  </div>
+                  <!--<pre class="card card-block card-header">{{galleryPrivacy}},{{privacyButtonText}}</pre>-->
+                  <!-- Ending Gallery Privacy/Publication -->
+
+                  <!-- Begin Gallery Caption -->
+                  <!--<div class="row">
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        formControlName="gallerycaption"
+                        class="form-control"
+                        id="galleryCaption"
+                        placeholder="Caption this.">
+                    </div>
+                  </div>-->
+
+                  <!--<p>Default Caption Type: {{captionTypeNameForGallery}} (Can't be changed)</p>-->
+
+                  <!--<p>{{galleryForm.controls.gallerycaption.value}}</p>
+                  <p>{{galleryForm.controls.gallerycaptiontype.value}}</p>-->
+                  <!-- End Gallery Caption -->
+
+                  <!-- Begin Mime Group Type -->
+                  <label class="sr-only" for="subject">Gallery Mime Group</label>
+                  <div>Mime Group Type</div>
+                  <!--<select formControlName="gallerymimegroupid" class="form-control" name="galleryMimeGroupType" required>
+                    <option *ngFor="let mimeType of listedMimeGroups" [ngValue]='mimeType.mime_type_group_id'>{{mimeType.mime_type_group_name}}</option>
+                  </select>-->
+                  <!-- End Mime Group Type-->
+                  <br>
+                  <!-- REMOVING - GALLERY CAPTION TYPE NEEDS TO BE IN THE BACKGROUND -->
+                  <!-- Begin Gallery Caption Types -->
+                  <!--<label class="sr-only" for="subject">Caption Types</label>
+                  <div>Gallery Caption Type</div>
+                  <select formControlName="gallerycaptiontypeid" class="form-control" name="galleryCaptionType" required>
+                    <option *ngFor="let captionType of listedCaptionTypes" [ngValue]='captionType.caption_type_id'>{{captionType.caption_type_name}}</option>
+                  </select>-->
+                  <!-- End Gallery Caption Types-->
+                  <br>
+                  <!-- Begin Gallery Group Type -->
+                  <label class="sr-only" for="subject">Gallery Group Types</label>
+                  <div>Gallery Group Type</div>
+                  <select *ngIf="showGalleryGroupTypesObject" formControlName="gallerygrouptypeid" class="form-control" name="galleryGroupType" required>
+                    <option disabled hidden>Select Gallery Group Type</option>
+                    <option *ngFor="let groupType of galleryGroupTypes" [ngValue]='groupTypeOption.group_type_id'>{{groupTypeOption.group_type_name}}</option>
+                  </select>
+                  <p class="help-block text-dark">{{groupType.galleryGroupTypeName}}</p>
+                  <!-- End Gallery Group Type -->
+
+                  <!-- Begin Gallery Type -->
+                  <!-- End Gallery Type-->
+
+                  <!-- Begin Gallery Order Type -->
+                  <label class="sr-only" for="subject">Gallery Order Type</label>
+                  <div>Gallery Order Type</div>
+                  <select formControlName="galleryOrderTypes" class="form-control" name="galleryOrderCategory" required>
+                    <option disabled hidden value="0">Select Order Type</option>
+                    <option *ngFor="let orderType of galleryOrderTypes" [ngValue]='orderType.id'>{{orderType.gallery_order_type_name}}</option>
+                  </select>
+                  <!--<p class="help-block text-danger">{{orderType.gallery_order_type_name}}</p>-->
+                  <!-- End Gallery Order Type -->
+
+                  <br>
+
+                  <!-- Begin Album Style Type -->
+                  <label class="sr-only" for="subject">Album Style Type</label>
+                  <div>Album Style Type</div>
+                  <select formControlName="albumStyleTypes" class="form-control" name="albumStyleTypes" required>
+                    <option disabled hidden value="0">Select Album Style Type</option>
+                    <option *ngFor="let styleType of galleryStyles">{{styleType.galleryStyleName}}</option>
+                  </select>
+
+                  <p class="help-block text-danger">{{styleType.galleryStyleName}}</p>
+                  <!-- End Album Style Type -->
+              </div>
+              <!-- End of Collaspable Content -->
+            </div>
+            <br>
+          <button type="submit" class="btn btn-dark btn-block">Start</button>
+          </div> <!-- end of form group -->
+        </form>
+      </div> <!-- end of container -->
+    </div> <!-- End of Jumbotron -->
+  </div> <!-- end of column -->
+</div>

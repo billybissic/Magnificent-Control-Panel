@@ -1,0 +1,24 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div>
+    <h5>Employment Position Types</h5>
+    <form class="position-types-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Type Name" value="Bartender">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Position Type Description" value="Mix and serve classic cocktails">
+      </mat-form-field>
+    </form>
+
+    <div class="submit-button-row">
+      <button mat-flat-button color="primary">Create New Position Type</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <app-position-types></app-position-types>
+  </div>
+  <br>
+  <br>
+</div>

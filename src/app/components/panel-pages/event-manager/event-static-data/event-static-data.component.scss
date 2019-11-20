@@ -1,0 +1,46 @@
+.card-fluid {
+    min-width: 100%;
+    box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.603);
+}
+
+.form-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-variant-caps: all-small-caps;
+    font-size: 12px;
+}
+
+.form-control {
+    box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.603);
+}
+
+.form-row {
+    width: 100%;
+}
+
+.table td, .table th {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+}
+
+.table {
+    padding-bottom: 0px;
+}
+
+.table-responsive {
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.table-y-scroll {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.table-x-scroll {
+    max-width: 750px;
+    overflow-x: scroll;
+}

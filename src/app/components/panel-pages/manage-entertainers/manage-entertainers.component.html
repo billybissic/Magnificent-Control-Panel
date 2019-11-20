@@ -1,0 +1,131 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>{{Mode}} Entertainer Profile</h1>
+    </div>
+  </div>
+
+  <div [ngSwitch]="Mode">
+    <div *ngSwitchCase="'Editing'">
+      <!-- Beginning of Editing Components -->
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <h4>Create New Profile</h4>
+              <div class="row">&nbsp;</div>
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-control" type="text" placeholder="First Name">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="text" placeholder="Last Name">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="text" placeholder="Stage Name">
+                </div>
+                <div class="col">
+                  <button class="form-control btn-secondary">
+                    Add
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">&nbsp;</div>
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <h4>Edit Profile</h4>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-select placeholder="Select an entertainer profile to edit">
+                    <mat-option *ngFor="" [value]="">
+
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    Drop Photo
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <ckeditor [editor]="Editor"></ckeditor>
+              </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <button class="form-control btn-secondary">Save & Publish</button>
+              </div>
+              <div class="col">
+                <button class="form-control btn-secondary">Delete</button>
+              </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <button class="form-control btn-secondary" (click)="saveAndPreview()">Save & Preview</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Ending Editing Components -->
+
+    <div class="row">&nbsp;</div>
+
+    <!-- Preview Components -->
+    <div *ngSwitchCase="'Previewing'">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-1">
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                Preview Image & Bio
+              </div>
+            </div>
+          </div>
+          <div class="col-1">
+          </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+          <div class="col-1">
+          </div>
+          <div class="col-10">
+            <div class="row">
+              <div class="col">
+                <button class="form-control btn-secondary" (click)="returnToEditing()">Continue Editing</button>
+              </div>
+              <div class="col">
+                <button class="form-control btn-secondary">Publish</button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+</div>

@@ -1,0 +1,386 @@
+<div *ngIf="auth.isAuthenticated()">
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Group Type</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input formControlName="groupTypeName" type="text" class="form-control" placeholder="Group Type Name">
+              </div>
+              <div class="col-7">
+                <input formControlName="groupTypeDescription" type="text" class="form-control" placeholder="Group Type Description">
+              </div>
+            </div>
+            <div class="form-row">
+              &nbsp;
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <select class="form-control" formControlName="groupTypeMimeTypeGroup">
+                  <option selected disabled hidden value="0">Choose Mime Type Group</option>
+                  <option value="{{mimeType.mime_type_group_id}}" *ngFor="let mimeType of mimeTypeGroups">{{mimeType.mime_type_group_name}}</option>
+                </select>
+              </div>
+              <!--</div>
+              <div class="form-row">-->
+              <div class="col-1">
+                <button type="submit" class="form-control btn-secondary" >
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Gallery Group Type</th>
+          <th style="width: 300px; white-space: nowrap;">Gallery Group Type Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let groupType of galleryGroupTypes">
+          <td>{{groupType.id}}</td>
+          <td>{{groupType.galleryGroupTypeName}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{groupType.galleryGroupTypeDescription}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryGroupType(groupType.id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Order Category</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Category Name">
+              </div>
+              <div class="col-7">
+                <input type="text" class="form-control" placeholder="Category Description">
+              </div>
+              <div class="col-1">
+                <button type="button" class="form-control btn-secondary">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Order Category Name</th>
+          <th style="width: 300px; white-space: nowrap;">Order Category Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let orderCategories of galleryOrderCategories">
+          <td>{{orderCategories.id}}</td>
+          <td>{{orderCategories.gallery_order_category_name}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{orderCategories.gallery_order_category_description}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryOrderCategory(orderCategories.id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Order Type</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Order Type Name">
+              </div>
+              <div class="col-7">
+                <input type="text" class="form-control" placeholder="Order Type Description">
+              </div>
+              <div class="col-1">
+                <button type="button" class="form-control btn-secondary">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Order Type</th>
+          <th style="width: 300px; white-space: nowrap;">Order Type Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ordertype of galleryOrderTypes">
+          <td>{{ordertype.id}}</td>
+          <td>{{ordertype.gallery_order_type_name}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{ordertype.gallery_order_type_description}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryOrderType(ordertype.id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Style Type</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Style  Name">
+              </div>
+              <div class="col-7">
+                <input type="text" class="form-control" placeholder="Style Description">
+              </div>
+              <div class="col-1">
+                <button type="button" class="form-control btn-secondary">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Style Name</th>
+          <th style="width: 300px; white-space: nowrap;">Style Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let styleType of galleryStyles">
+          <td>{{styleType.id}}</td>
+          <td>{{styleType.galleryStyleName}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{styleType.galleryStyleDescription}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryStyle(styleType.id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Order Directions</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Direction Name">
+              </div>
+              <div class="col-7">
+                <input type="text" class="form-control" placeholder="Order Direction Description">
+              </div>
+              <div class="col-1">
+                <button type="button" class="form-control btn-secondary">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Order Direction Name</th>
+          <th style="width: 300px; white-space: nowrap;">Order Direction Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let orderDirection of galleryOrderDirections">
+          <td>{{orderDirection.id}}</td>
+          <td>{{orderDirection.galleryOrderDirectionName}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{orderDirection.gallery_order_direction_description}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteGalleryOrderDirection(orderDirection.id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="card card-fluid">
+      <div class="card-body">
+        <span class="form-title">Gallery Object Types</span>
+        <form (ngSubmit)="addNewGalleryGroupType()" novalidate>
+          <div [formGroup]="galleryGroupTypeForm" class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Object Name">
+              </div>
+              <div class="col-7">
+                <input type="text" class="form-control" placeholder="Object Type Description">
+              </div>
+              <div class="col-1">
+                <button type="button" class="form-control btn-secondary">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="table-responsive table-y-scroll table-x-scroll">
+      <table class="table table-hover" style="max-width: 750px;">
+        <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th style="width: 150px;">Object Type Name</th>
+          <th style="width: 300px; white-space: nowrap;">Object Type Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let objectType of galleryObjectTypes">
+          <td>{{objectType.id}}</td>
+          <td>{{objectType.gallery_object_type_name}}</td>
+          <td style="white-space:pre-wrap; max-width: 275px;">{{objectType.gallery_object_type_description}}</td>
+          <td style="width: 150px;">
+            <button type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </div>
+            </button>
+            <button  (click)="deleteContactTime(time.contact_timeframe_id)" type="button" class="btn btn-secondary btn-sm">
+              <div style="text-align:center">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </div>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
